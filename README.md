@@ -1,2 +1,2 @@
-ssp-frontend
+SSP Frontend
 ============
