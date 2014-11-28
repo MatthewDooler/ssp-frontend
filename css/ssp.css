@@ -1,0 +1,57 @@
+/*!
+ * ServerStatusPage.com core stylesheet
+ * Copyright 2014
+ */
+
+/* Main site header */
+.site-header {
+  padding: 15px 20px 15px 20px;
+  margin: 0 0 5px 0;
+  background-color: #eeeeee;
+  border-bottom: 1px solid #bbbbbb;
+}
+.site-header h1 {
+  margin: 0;
+}
+.site-header h1 small {
+  font-weight: normal;
+  font-size: 20px;
+}
+.site-header h2 {
+  margin: 0;
+}
+
+/* Main site container */
+.site-content {
+  margin: 15px;
+}
+
+#site-error {
+  padding: 5px;
+  width: 175px;
+  text-align: center;
+  margin: 0 auto 0 auto;
+  position: absolute;
+  top: -100px;
+  left: 0;
+  right: 0;
+}
+
+#panel-controls {
+  margin-bottom: 10px;
+}
+#panel-controls .pagination-buttons {
+  float: right;
+}
+#panel-controls .view-server-list-button {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.panel-title {
+  font-size: 17px;
+  font-weight: bold;
+  padding-left: 7px;
+  color: #444444;
+}
+

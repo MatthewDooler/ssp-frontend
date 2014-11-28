@@ -31,7 +31,7 @@ var EmptyServerTableRow = Backbone.View.extend({
 var ServerTable = Backbone.View.extend({
 
   tagName: "tbody",
-  el: "#server-table > tbody",
+  el: "#server-list-panel > table > tbody",
 
   initialize: function() {
     this.listenTo(this.collection, "sync", this.render);
@@ -39,7 +39,16 @@ var ServerTable = Backbone.View.extend({
     this.listenTo(this.collection, "remove", this.render);
     this.listenTo(this.collection, "reset", this.render);
     this.listenTo(this.collection, "sort", this.render);
-    
+    this.listenTo(this.collection, "error", this.error);
+  },
+
+  error: function(collection, resp, options) {
+    $("#site-error").show().animate({'top': '5px'}, 1000).html("Network error");
+    setTimeout(function() {
+      $("#site-error").fadeOut(function() {
+        $(this).css('top', '-100px')
+      });
+    }, 5000);
   },
 
   render: function() {
