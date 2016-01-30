@@ -28,7 +28,7 @@ var Server = Backbone.Model.extend({
   }
 });
 
-var Servers = Backbone.Collection.extend({
+var Servers = Backbone.PageableCollection.extend({
   model: Server,
   url: settings.apiEndpoint + '/servers?client=106&sort=-uptime,-votes',
 

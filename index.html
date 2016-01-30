@@ -35,6 +35,7 @@
 
 
       <div class="alert alert-danger" id="site-error"></div>
+      <div class="alert alert-info" id="loading-indicator"></div>
 
       <div class="row">
         <div class="col-md-2">
@@ -60,11 +61,11 @@
             <span class="panel-title"></span>
 
             <span class="pagination-buttons">
-              <button type="button" class="btn btn-default disabled" aria-label="Left">
+              <button type="button" class="btn btn-default disabled prev-button" aria-label="Left">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
               </button>
 
-              <button type="button" class="btn btn-default disabled" aria-label="Right">
+              <button type="button" class="btn btn-default next-button" aria-label="Right">
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
               </button>
             </span>
@@ -75,17 +76,17 @@
               <table class="server-list">
                 <thead>
                   <tr>
-                    <th>Rank</th>
-                    <th>Name</th>
-                    <th>Uptime</th>
-                    <th>Type</th>
-                    <th>Ping</th>
-                    <th>Votes</th>
+                    <th style="width: 10%;">Rank</th>
+                    <th style="width: 35%;">Name</th>
+                    <th style="width: 20%;">Uptime</th>
+                    <th style="width: 15%;">Type</th>
+                    <th style="width: 10%;">Ping</th>
+                    <th style="width: 10%;">Votes</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td colspan="2" id="server-table-status">Loading...</td>
+                    <td colspan="6" id="server-table-status">Loading...</td>
                   </tr>
                 </tbody>
               </table>
@@ -122,25 +123,54 @@
     </script>
 
     <script type="text/template" id="tpl-empty-server-row">
-      <td colspan="2">No servers to display</td>
+      <td colspan="6">No servers to display</td>
     </script>
 
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/underscore-min.js"></script>
     <script src="js/backbone-min.js"></script>
+    <script src="js/backbone.paginator.min.js"></script>
 
     <script src="js/config.js"></script>
 
     <script src="js/models.js"></script>
     <script src="js/views.js"></script>
     <script>
+
+      var loading = false
+      $.ajaxSetup({
+        beforeSend: function() {
+          loading = true
+          ignorePeriod = 100 // don't display anything if load completes within this time
+          setTimeout(function() {
+            if(loading) {
+              $("#loading-indicator").show().animate({'top': '5px'}, 100).html("Loading...");
+            }
+          }, ignorePeriod);
+        },
+        complete: function() {
+          loading = false
+          $("#loading-indicator").fadeOut(function() {
+            $(this).css('top', '-100px')
+          });
+        }
+      });
+
       var servers = new Servers;
       servers.fetch();
       var serverTable = new ServerTable({ collection: servers });
 
       $("#refresh-servers").click(function() {
         servers.fetch();
+      });
+
+      $(".prev-button").click(function() {
+        servers.getPreviousPage();
+      });
+
+      $(".next-button").click(function() {
+        servers.getNextPage();
       });
 
       $(".view-server-list-button").click(function() {

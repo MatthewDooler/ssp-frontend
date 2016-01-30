@@ -63,6 +63,13 @@ var ServerTable = Backbone.View.extend({
       var row = new EmptyServerTableRow({ model: null });
       this.$el.append(row.render().el);
     }
+
+    if(this.collection.hasPreviousPage()) {
+      $(".prev-button").toggleClass("disabled", false);
+    } else {
+      $(".prev-button").toggleClass("disabled", true);
+    }
+
     return this;
   }
 
