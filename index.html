@@ -18,6 +18,7 @@
   </head>
   <body>
     
+    <!-- TODO: this banner makes the whole website look shit -->
     <div class="site-header">
       <h1>ServerStatusPage<small>.com</small></h1>
       <h2><small>Private game servers for RuneScape, Minecraft and more.</small></h2>
@@ -71,11 +72,15 @@
 
           <div class="tab-content">
             <div id="server-list-panel" class="tab-pane active" role="tabpanel">
-              <table class="table table-bordered table-striped table-hover">
+              <table class="server-list">
                 <thead>
                   <tr>
-                    <td style="width: 50px;">ID</td>
-                    <td>Name</td>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Uptime</th>
+                    <th>Type</th>
+                    <th>Ping</th>
+                    <th>Votes</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -106,10 +111,14 @@
       </div>
     </div>
 
-
+    <!-- TODO: don't display servers that have been offline for a solid 24 hours (will avoid this problem of 100s of servers) -->
     <script type="text/template" id="tpl-server-row">
-      <td><%= id %></td>
-      <td><%= name %></td>
+      <td class="rank">&#35;<%= id %></td><!-- TODO: use rank, not ID -->
+      <td class="name"><%= name %></td>
+      <td><div class="uptime-bar"><div style="width: <%= uptime_percentage %>%;"><%= uptime_percentage %>%</div></div></td>
+      <td class="type"><%= type %></td>
+      <td><img src="images/signal-<%= latency_signal %>.png" alt="<%= latency %>ms" title="<%= latency %>ms" /></td>
+      <td class="votes"><%= rating_pos-rating_neg %></td>
     </script>
 
     <script type="text/template" id="tpl-empty-server-row">
