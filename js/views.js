@@ -120,6 +120,9 @@ var ServerView = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+    this.$el.find(".view-server-list-button").click(function() {
+      $(this).tab('show');
+    });
     return this;
   }
 });

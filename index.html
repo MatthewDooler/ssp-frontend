@@ -46,10 +46,7 @@
           </ul>
         </div>
         <div class="col-md-10">
-
-
-
-          <div class="tab-content">
+          <div class="tab-content" style="overflow-y: auto;">
             <div id="server-list-panel" class="tab-pane active" role="tabpanel">
 
               <div class="panel-controls" role="tablist">
@@ -114,12 +111,6 @@
 
             <div id="view-server-panel" class="tab-pane" role="tabpanel">
 
-              <div class="panel-controls" role="tablist">
-                <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back to server list">
-                  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                </button>
-              </div>
-
               <div id="view-server-panel-content"></div>
 
             </div>
@@ -140,14 +131,19 @@
     </script>
 
     <script type="text/template" id="tpl-view-server">
-      <h2><%= name %></h2>
-      <hr />
+
+      <div class="panel-controls" role="tablist">
+        <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back to server list">
+          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        </button>
+        <span class="panel-title"><%= name %></span>
+      </div>
 
       <div class="well">
         <b>Host:</b> <input type="text" value="<%= address %>" readonly="readonly" style="background: none; border: none; width: 200px;" onClick="this.setSelectionRange(0, this.value.length)" /><br />
         <b>Port:</b> <input type="text" value="<%= port %>" readonly="readonly" style="background: none; border: none; width: 200px;" onClick="this.setSelectionRange(0, this.value.length)" /><br /><br />
         <div class="uptime-bar" style="width: 200px; display: inline-block;"><div style="width: <%= uptime_percentage %>%;"><%= uptime_percentage %>%</div></div> uptime since <%= new Date(created*1000).toISOString() %><br />
-        <h4>0 Votes</h4>
+        <h4><%= rating_pos-rating_neg %> Votes</h4>
       </div>
 
       <div class="well">
@@ -185,7 +181,20 @@
     <script src="js/views.js"></script>
     <script>
 
-      var loading = false
+      function viewportSetup() {
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+        var topOffset = $(".tab-content").get(0).getBoundingClientRect().top;
+        var bottomMargin = 0;
+        $(".tab-content").css("height", viewportHeight - topOffset - bottomMargin);
+      }
+
+      viewportSetup();
+      $(window).resize(function() {
+        viewportSetup();
+      });
+
+      var loading = false;
       $.ajaxSetup({
         beforeSend: function() {
           loading = true

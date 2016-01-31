@@ -54,7 +54,7 @@ div.flag-drop > span {
 
 /* Main site container */
 .site-content {
-  margin: 15px;
+  margin: 15px 15px 0 15px;
 }
 
 #site-error, #loading-indicator {
@@ -85,11 +85,6 @@ div.flag-drop > span {
   padding-left: 7px;
   color: #444444;
 }
-
-
-
-
-
 
 
 

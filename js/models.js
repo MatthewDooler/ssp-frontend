@@ -10,7 +10,7 @@ var Server = Backbone.Model.extend({
     this.set({
       uptime_percentage: Math.round(this.get("uptime") / (this.get("uptime")+this.get("downtime"))*100),
       latency_signal: this.latencyToSignal(this.get("latency")),
-      description_formatted: this.format_description(this.get("description"))
+      description_formatted: this.formatDescription(this.get("description"))
     }, {silent:true});
   },
   latencyToSignal: function(latency) {
@@ -28,7 +28,7 @@ var Server = Backbone.Model.extend({
       return 1
     }
   },
-  format_description: function(description) {
+  formatDescription: function(description) {
     if(description) {
       return XBBCODE.process({
         text: description,
