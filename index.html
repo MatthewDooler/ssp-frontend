@@ -48,33 +48,29 @@
         </div>
         <div class="col-md-10">
 
-          <div id="panel-controls" role="tablist">
 
-            <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back to server list" style="display: none;">
-              <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-            </button>
-
-            <button type="button" class="btn btn-primary add-server-button" data-target="#add-server-panel">Add a server</button>
-
-            <button type="button" class="btn btn-default refresh-button" aria-label="Refresh" id="refresh-servers">
-              <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-            </button>
-
-            <span class="panel-title"></span>
-
-            <span class="pagination-buttons">
-              <button type="button" class="btn btn-default disabled prev-button" aria-label="Left">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              </button>
-
-              <button type="button" class="btn btn-default next-button" aria-label="Right">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              </button>
-            </span>
-          </div>
 
           <div class="tab-content">
             <div id="server-list-panel" class="tab-pane active" role="tabpanel">
+
+              <div class="panel-controls" role="tablist">
+                <button type="button" class="btn btn-primary add-server-button" data-target="#add-server-panel">Add a server</button>
+
+                <button type="button" class="btn btn-default refresh-button" aria-label="Refresh" id="refresh-servers">
+                  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                </button>
+
+                <span class="pagination-buttons">
+                  <button type="button" class="btn btn-default disabled prev-button" aria-label="Left">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  </button>
+
+                  <button type="button" class="btn btn-default next-button" aria-label="Right">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </div>
+
               <table class="server-list">
                 <thead>
                   <tr>
@@ -95,6 +91,17 @@
             </div>
             <div id="add-server-panel" class="tab-pane" role="tabpanel">
 
+              <div class="panel-controls" role="tablist">
+
+                <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back to server list">
+                  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </button>
+
+                <span class="panel-title">Add a server</span>
+
+              </div>
+
+
               <form role="form">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
@@ -114,7 +121,6 @@
       </div>
     </div>
 
-    <!-- TODO: don't display servers that have been offline for a solid 24 hours (will avoid this problem of 100s of servers) -->
     <script type="text/template" id="tpl-server-row">
       <td class="rank"><div class="rank-val">&#35;<%= id %></div></td><!-- TODO: use rank, not ID -->
       <td class="name"><%= name %></td>
@@ -122,6 +128,10 @@
       <td class="type"><%= type %></td>
       <td><img src="images/signal-<%= latency_signal %>.png" alt="<%= latency %>ms" title="<%= latency %>ms" /></td>
       <td class="votes"><%= rating_pos-rating_neg %></td>
+    </script>
+
+    <script type="text/template" id="tpl-server-more-info">
+      <div>Name: <%= name %></div>
     </script>
 
     <script type="text/template" id="tpl-empty-server-row">
@@ -177,20 +187,10 @@
 
       $(".view-server-list-button").click(function() {
         $(this).tab('show');
-        $(".view-server-list-button").hide();
-        $(".add-server-button").show();
-        $(".refresh-button").show();
-        $(".pagination-buttons").show();
-        $(".panel-title").html("");
       });
 
       $(".add-server-button").click(function() {
         $(this).tab('show');
-        $(".view-server-list-button").show();
-        $(".add-server-button").hide();
-        $(".refresh-button").hide();
-        $(".pagination-buttons").hide();
-        $(".panel-title").html("Add a server");
       });
     </script>
   </body>

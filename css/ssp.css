@@ -64,13 +64,13 @@ div.flag-drop > span {
   right: 0;
 }
 
-#panel-controls {
+.panel-controls {
   margin-bottom: 10px;
 }
-#panel-controls .pagination-buttons {
+.panel-controls .pagination-buttons {
   float: right;
 }
-#panel-controls .view-server-list-button {
+.panel-controls .view-server-list-button {
   padding-left: 20px;
   padding-right: 20px;
 }

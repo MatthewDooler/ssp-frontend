@@ -77,3 +77,35 @@ var ServerTable = Backbone.View.extend({
   }
 
 });
+
+
+
+
+
+
+
+
+
+
+
+var ServerMoreInfoView = Backbone.View.extend({
+
+  tagName: "div",
+  template: _.template( $('#tpl-server-more-info').html()),
+
+  events: {
+    "click .icon":          "open",
+    "click .button.edit":   "openEditDialog",
+    "click .button.delete": "destroy"
+  },
+
+  initialize: function() {
+    this.listenTo(this.model, "change", this.render);
+  },
+
+  render: function() {
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  }
+});
+
