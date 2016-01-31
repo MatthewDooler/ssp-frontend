@@ -15,9 +15,7 @@ var ServerTableRow = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
-    /*if(this.model.sponsored == 1) {
-      this.$el.addClass("sponsored");
-    }*/
+    if(this.model.get("sponsored") == 1) this.$el.addClass("sponsored");
     return this;
   }
 });

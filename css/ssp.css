@@ -96,6 +96,7 @@ table.server-list tr a {
 table.server-list {
   width: 100%;
   border-spacing: 0;
+  border-collapse:separate;
 }
 
 table.server-list a {
@@ -226,5 +227,20 @@ div.uptime-bar > div {
 }
 
 tr.sponsored td {
-  background-color: pink;
+  background-color: #ffe86f; /* FADA5E */
+  border-bottom: 7px solid white;
+  font-weight: 500;
+}
+
+tr.sponsored td:first-child {
+  background-image: url('../images/premium-banner.png');
+  background-repeat: no-repeat;
+}
+
+tr.sponsored:hover td {
+  background-color: #ffde2a; /* FFD700 */
+}
+
+tr.sponsored td div.rank-val { /* dummy div to allow height adjustment */
+  padding: 20px 0 20px 0;
 }

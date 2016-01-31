@@ -116,7 +116,7 @@
 
     <!-- TODO: don't display servers that have been offline for a solid 24 hours (will avoid this problem of 100s of servers) -->
     <script type="text/template" id="tpl-server-row">
-      <td class="rank">&#35;<%= id %></td><!-- TODO: use rank, not ID -->
+      <td class="rank"><div class="rank-val">&#35;<%= id %></div></td><!-- TODO: use rank, not ID -->
       <td class="name"><%= name %></td>
       <td><div class="uptime-bar"><div style="width: <%= uptime_percentage %>%;"><%= uptime_percentage %>%</div></div></td>
       <td class="type"><%= type %></td>
