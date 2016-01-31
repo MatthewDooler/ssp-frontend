@@ -3,6 +3,9 @@
  * Copyright 2014
  */
 
+html, body {
+  overflow-x: hidden; 
+}
 
 /* Main site header */
 .site-header {
@@ -54,12 +57,12 @@ div.flag-drop > span {
 
 /* Main site container */
 .site-content {
-  margin: 15px 15px 0 15px;
+  margin: 15px 0 0 15px;
 }
 
 .tab-content {
   overflow-y: auto;
-  padding-bottom: 15px;
+  padding: 0 15px 15px 0;
 }
 
 #site-error, #loading-indicator {
