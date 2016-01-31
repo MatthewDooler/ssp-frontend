@@ -123,8 +123,8 @@
     </div>
 
     <script type="text/template" id="tpl-server-row">
-      <td class="rank"><div class="rank-val"><a href="javascript:;" class="view-server-button" data-target="#view-server-panel" data-id="<%= id %>">&#35;<%= id %></a></div></td><!-- TODO: use rank, not ID -->
-      <td class="name"><a href="javascript:;" class="view-server-button" data-target="#view-server-panel" data-id="<%= id %>"><%= name %></a></td>
+      <td class="rank"><div class="rank-val">&#35;<%= id %></div></td><!-- TODO: use rank, not ID -->
+      <td class="name"><%= name %></td>
       <td><div class="uptime-bar"><div style="width: <%= uptime_percentage %>%;"><%= uptime_percentage %>%</div></div></td>
       <td class="type"><%= type %></td>
       <td><img src="images/signal-<%= latency_signal %>.png" alt="<%= latency %>ms" title="<%= latency %>ms" /></td>

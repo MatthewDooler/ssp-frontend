@@ -146,7 +146,7 @@ table.server-list tbody tr {
 
 table.server-list tbody tr:hover {
   background-color: #eeeeee;
-  /*cursor: pointer;*/
+  cursor: pointer;
 }
 
 table.server-list tbody tr td {

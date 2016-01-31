@@ -16,6 +16,28 @@ var ServerTableRow = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
     if(this.model.get("sponsored") == 1) this.$el.addClass("sponsored");
+
+    var server_id = this.model.get("id");
+    this.$el.data("target", "#view-server-panel");
+    this.$el.data("id", server_id);
+    this.$el.click(function() {
+        // TODO: make sure we don't re-attach handlers to old elements when we're doing fancy re-rendering
+        var button = this;
+        console.log("handling view-server click for " + server_id);
+
+        var server = new Server({ id: server_id });
+        var serverView = new ServerView({ model: server });
+
+        server.fetch({
+          success: function(model, response, options) {
+            $(button).tab('show');
+          },
+          error: function(model, response, options) {
+            flashSiteError("Network error");
+          }
+        });
+    });
+
     return this;
   }
 });
@@ -67,25 +89,6 @@ var ServerTable = Backbone.View.extend({
     } else {
       $(".prev-button").toggleClass("disabled", true);
     }
-
-    this.$el.find(".view-server-button").click(function() {
-        // TODO: make sure we don't re-attach handlers to old elements when we're doing fancy re-rendering
-        var button = this;
-        var server_id = $(this).data("id")
-        console.log("handling view-server click for " + server_id);
-
-        var server = new Server({ id: server_id });
-        var serverView = new ServerView({ model: server });
-
-        server.fetch({
-          success: function(model, response, options) {
-            $(button).tab('show');
-          },
-          error: function(model, response, options) {
-            flashSiteError("Network error");
-          }
-        });
-    });
 
     return this;
   }
