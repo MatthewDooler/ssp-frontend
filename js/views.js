@@ -45,12 +45,7 @@ var ServerTable = Backbone.View.extend({
   },
 
   error: function(collection, resp, options) {
-    $("#site-error").show().animate({'top': '5px'}, 1000).html("Network error");
-    setTimeout(function() {
-      $("#site-error").fadeOut(function() {
-        $(this).css('top', '-100px')
-      });
-    }, 5000);
+    flashSiteError("Network error");
   },
 
   render: function() {
@@ -73,6 +68,25 @@ var ServerTable = Backbone.View.extend({
       $(".prev-button").toggleClass("disabled", true);
     }
 
+    this.$el.find(".view-server-button").click(function() {
+        // TODO: make sure we don't re-attach handlers to old elements when we're doing fancy re-rendering
+        var button = this;
+        var server_id = $(this).data("id")
+        console.log("handling view-server click for " + server_id);
+
+        var server = new Server({ id: server_id });
+        var serverView = new ServerView({ model: server });
+
+        server.fetch({
+          success: function(model, response, options) {
+            $(button).tab('show');
+          },
+          error: function(model, response, options) {
+            flashSiteError("Network error");
+          }
+        });
+    });
+
     return this;
   }
 
@@ -88,10 +102,11 @@ var ServerTable = Backbone.View.extend({
 
 
 
-var ServerMoreInfoView = Backbone.View.extend({
+var ServerView = Backbone.View.extend({
 
   tagName: "div",
-  template: _.template( $('#tpl-server-more-info').html()),
+  template: _.template( $('#tpl-view-server').html()),
+  el: "#view-server-panel > #view-server-panel-content",
 
   events: {
     "click .icon":          "open",
@@ -108,4 +123,13 @@ var ServerMoreInfoView = Backbone.View.extend({
     return this;
   }
 });
+
+function flashSiteError(e) {
+  $("#site-error").show().animate({'top': '5px'}, 1000).html(e);
+  setTimeout(function() {
+    $("#site-error").fadeOut(function() {
+      $(this).css('top', '-100px')
+    });
+  }, 5000);
+}
 

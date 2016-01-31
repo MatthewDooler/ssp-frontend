@@ -1,4 +1,5 @@
 var Server = Backbone.Model.extend({
+  urlRoot: settings.apiEndpoint + '/servers',
   initialize: function() {
         this.updateDerivedAttributes();
         this.on('change:uptime', this.updateDerivedAttributes, this);

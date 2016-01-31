@@ -193,6 +193,7 @@ table.server-list tbody td.players {
 
 table.server-list tr a {
     display: block;
+    color: inherit;
 }
 
 

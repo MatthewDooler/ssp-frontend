@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ServerStatusPage &middot; Private game servers for RuneScape, Minecraft and more.</title>
+
+    <title>Server Status Page &middot; Private game servers for RuneScape, Minecraft and more.</title>
+    <meta name="description" content="Server status page of the best RuneScape and Minecraft servers" />
+    <meta name="keywords" content="advertise, private, rsps, server, play, minecraft, runescape, game, status, list, serverstatus" />
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/ssp.css" rel="stylesheet">
@@ -18,11 +21,7 @@
   </head>
   <body>
     
-    <!-- TODO: this banner makes the whole website look shit -->
-    <div class="site-header">
-      <!--<h1>ServerStatusPage<small>.com</small></h1>
-      <h2><small>Private game servers for RuneScape, Minecraft and more.</small></h2>-->
-    </div>
+    <div class="site-header"></div>
 
     <div class="flag-drop"><a href="javascript:;">Login</a> <span>|</span> <a href="javascript:;">Register</a></div>
 
@@ -89,18 +88,15 @@
                 </tbody>
               </table>
             </div>
+
             <div id="add-server-panel" class="tab-pane" role="tabpanel">
 
               <div class="panel-controls" role="tablist">
-
                 <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back to server list">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </button>
-
                 <span class="panel-title">Add a server</span>
-
               </div>
-
 
               <form role="form">
                 <div class="form-group">
@@ -115,6 +111,19 @@
               </form>
 
             </div>
+
+            <div id="view-server-panel" class="tab-pane" role="tabpanel">
+
+              <div class="panel-controls" role="tablist">
+                <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back to server list">
+                  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <div id="view-server-panel-content"></div>
+
+            </div>
+
           </div>
 
         </div>
@@ -122,15 +131,15 @@
     </div>
 
     <script type="text/template" id="tpl-server-row">
-      <td class="rank"><div class="rank-val">&#35;<%= id %></div></td><!-- TODO: use rank, not ID -->
-      <td class="name"><%= name %></td>
+      <td class="rank"><div class="rank-val"><a href="javascript:;" class="view-server-button" data-target="#view-server-panel" data-id="<%= id %>">&#35;<%= id %></a></div></td><!-- TODO: use rank, not ID -->
+      <td class="name"><a href="javascript:;" class="view-server-button" data-target="#view-server-panel" data-id="<%= id %>"><%= name %></a></td>
       <td><div class="uptime-bar"><div style="width: <%= uptime_percentage %>%;"><%= uptime_percentage %>%</div></div></td>
       <td class="type"><%= type %></td>
       <td><img src="images/signal-<%= latency_signal %>.png" alt="<%= latency %>ms" title="<%= latency %>ms" /></td>
       <td class="votes"><%= rating_pos-rating_neg %></td>
     </script>
 
-    <script type="text/template" id="tpl-server-more-info">
+    <script type="text/template" id="tpl-view-server">
       <div>Name: <%= name %></div>
     </script>
 
