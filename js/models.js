@@ -9,7 +9,8 @@ var Server = Backbone.Model.extend({
   updateDerivedAttributes: function() {
     this.set({
       uptime_percentage: Math.round(this.get("uptime") / (this.get("uptime")+this.get("downtime"))*100),
-      latency_signal: this.latencyToSignal(this.get("latency"))
+      latency_signal: this.latencyToSignal(this.get("latency")),
+      description_formatted: this.format_description(this.get("description"))
     }, {silent:true});
   },
   latencyToSignal: function(latency) {
@@ -25,6 +26,17 @@ var Server = Backbone.Model.extend({
       return 2
     } else {
       return 1
+    }
+  },
+  format_description: function(description) {
+    if(description) {
+      return XBBCODE.process({
+        text: description,
+        removeMisalignedTags: false,
+        addInLineBreaks: true
+      }).html;
+    } else {
+      return undefined;
     }
   }
 });

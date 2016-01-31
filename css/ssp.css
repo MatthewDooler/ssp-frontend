@@ -26,6 +26,10 @@
   margin: 0;
 }
 
+#view-server-panel h3 {
+  margin-top: 0px;
+}
+
 div.flag-drop {
     position: absolute;
     top: 0px;
