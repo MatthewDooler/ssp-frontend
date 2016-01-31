@@ -8,9 +8,12 @@
 .site-header {
   padding: 15px 20px 15px 20px;
   margin: 0 0 5px 0;
-  background-color: #eeeeee;
-  background-image: url('../images/dust.png');
+  background-color: #333333;
+  background-image: url('../images/ssp-logo.png'), url('../images/black-bg.png');
+  background-position: 5px 5px;
+  background-repeat: no-repeat, repeat;
   border-bottom: 1px solid #bbbbbb;
+  height: 110px;
 }
 .site-header h1 {
   margin: 0;
