@@ -15,6 +15,9 @@ var ServerTableRow = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+    /*if(this.model.sponsored == 1) {
+      this.$el.addClass("sponsored");
+    }*/
     return this;
   }
 });
@@ -35,10 +38,11 @@ var ServerTable = Backbone.View.extend({
 
   initialize: function() {
     this.listenTo(this.collection, "sync", this.render);
-    this.listenTo(this.collection, "add", this.render);
-    this.listenTo(this.collection, "remove", this.render);
+    // TODO: add disabled since it gets called for every new server on sync
+    //this.listenTo(this.collection, "add", this.render);
+    //this.listenTo(this.collection, "remove", this.render);
     this.listenTo(this.collection, "reset", this.render);
-    this.listenTo(this.collection, "sort", this.render);
+    //this.listenTo(this.collection, "sort", this.render);
     this.listenTo(this.collection, "error", this.error);
   },
 
@@ -52,6 +56,7 @@ var ServerTable = Backbone.View.extend({
   },
 
   render: function() {
+    console.log("rendering entire server table")
     // TODO: fiddle with rows so we don't get a full refresh
     this.$el.html("");
     if(this.collection.length > 0) {

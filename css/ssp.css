@@ -224,3 +224,7 @@ div.uptime-bar > div {
     font-weight: bold;
     min-width: 25px;
 }
+
+tr.sponsored td {
+  background-color: pink;
+}
