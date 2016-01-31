@@ -26,6 +26,28 @@
   margin: 0;
 }
 
+div.flag-drop {
+    position: absolute;
+    top: 0px;
+    right: 30px;
+    background-color: #ffffff;
+    border-radius: 0px 0px 4px 4px;
+    padding: 0px 8px 0px 8px;
+    font-size: 13px;
+    border: 1px solid #cccccc;
+    border-top: none;
+    font-weight: bold;
+}
+div.flag-drop a {
+  text-decoration: none;
+  color: black;
+}
+div.flag-drop > span {
+    color: #cccccc;
+    font-weight: normal;
+    font-size: 13px;
+}
+
 /* Main site container */
 .site-content {
   margin: 15px;
