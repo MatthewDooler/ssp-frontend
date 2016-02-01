@@ -236,6 +236,11 @@
         });
       }
 
+      function sortServers(field) {
+        // make sure sponsored servers always stay at the top
+        servers.setSorting("-sponsored,"+field);
+      }
+
       viewportSetup();
       $(window).resize(function() {
         viewportSetup();
@@ -262,7 +267,7 @@
       });
 
       var servers = new Servers;
-      servers.setSorting("rank");
+      sortServers("rank");
       servers.fetch();
       var serverTable = new ServerTable({ collection: servers });
 
@@ -309,7 +314,7 @@
 
         prefix = orderToPrefix(order)
 
-        servers.setSorting(prefix+sort);
+        sortServers(prefix+sort);
         updateOrderArrows();
         servers.fetch();
       });
