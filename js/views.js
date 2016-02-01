@@ -58,11 +58,13 @@ var ServerTable = Backbone.View.extend({
 
   initialize: function() {
     this.listenTo(this.collection, "sync", this.render);
-    // TODO: add disabled since it gets called for every new server on sync
+    // TODO: add is disabled since it gets called for every new server on sync
+    // TODO: on add, find adjacent server and append/prepend the row
+    // TODO: on delete, find by id and delete the row
     //this.listenTo(this.collection, "add", this.render);
     //this.listenTo(this.collection, "remove", this.render);
     this.listenTo(this.collection, "reset", this.render);
-    //this.listenTo(this.collection, "sort", this.render);
+    this.listenTo(this.collection, "sort", this.render);
     this.listenTo(this.collection, "error", this.error);
   },
 
@@ -94,16 +96,6 @@ var ServerTable = Backbone.View.extend({
   }
 
 });
-
-
-
-
-
-
-
-
-
-
 
 var ServerView = Backbone.View.extend({
 

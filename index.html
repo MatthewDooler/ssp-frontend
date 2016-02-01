@@ -71,12 +71,12 @@
               <table class="server-list">
                 <thead>
                   <tr>
-                    <th style="width: 10%;">Rank</th>
-                    <th style="width: 35%;">Name</th>
-                    <th style="width: 20%;">Uptime</th>
-                    <th style="width: 15%;">Type</th>
-                    <th style="width: 10%;">Ping</th>
-                    <th style="width: 10%;">Votes</th>
+                    <th style="width: 10%;" data-sort="rank" data-order="asc" data-default-order="asc">Rank</th>
+                    <th style="width: 35%;" data-sort="name" data-order="disabled" data-default-order="asc">Name</th>
+                    <th style="width: 20%;" data-sort="uptime" data-order="disabled" data-default-order="desc">Uptime</th>
+                    <th style="width: 15%;" data-sort="type" data-order="disabled" data-default-order="asc">Type</th>
+                    <th style="width: 10%;" data-sort="latency" data-order="disabled" data-default-order="asc">Ping</th>
+                    <th style="width: 10%;" data-sort="votes" data-order="disabled" data-default-order="desc">Votes</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -215,6 +215,7 @@
       });
 
       var servers = new Servers;
+      servers.setSorting("rank");
       servers.fetch();
       var serverTable = new ServerTable({ collection: servers });
 
@@ -237,6 +238,43 @@
       $(".add-server-button").click(function() {
         $(this).tab('show');
       });
+
+      $("table.server-list > thead > tr > th").click(function() {
+        var button = $(this)
+        var sort = button.data("sort")
+        var order = button.data("order")
+        var defaultOrder = button.data("default-order")
+
+        // disable all the existing orders
+        $("table.server-list > thead > tr > th").each(function(i, el) {
+          $(el).data("order", "disabled");
+          // TODO: reset the toggly icons (if we need to, might be easier to get css to detect data-order values)
+        });
+
+        // flip the order or use the default
+        if(order == "disabled") {
+          button.data("order", defaultOrder)
+        } else if(order == "asc") {
+          button.data("order", "desc")
+        } else if(order == "desc") {
+          button.data("order", "asc")
+        }
+        order = button.data("order")
+
+        prefix = orderToPrefix(order)
+
+        servers.setSorting(prefix+sort);
+        servers.fetch();
+        // TODO: need the little toggly icons
+      });
+
+      function orderToPrefix(order) {
+        if(order == "asc") {
+          return ""
+        } else if(order == "desc") {
+          return "-"
+        }
+      }
     </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

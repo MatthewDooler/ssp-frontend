@@ -119,6 +119,7 @@ table.server-list thead tr th {
   border-right: none;
   background-color: #f5f5f5;
   background-image: url('../images/dust.png');
+  cursor: pointer;
 }
 
 table.server-list thead tr th:hover {

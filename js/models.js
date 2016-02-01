@@ -44,7 +44,13 @@ var Server = Backbone.Model.extend({
 var Servers = Backbone.PageableCollection.extend({
   model: Server,
   /*url: settings.apiEndpoint + '/servers?client=106&sort=-sponsored,-uptime,-votes',*/
-  url: settings.apiEndpoint + '/servers?client=106&sort=rank',
+  /*url: settings.apiEndpoint + '/servers?client=106&sort=rank',*/
+
+  url: settings.apiEndpoint + '/servers?client=106',
+
+  queryParams: {
+    sortKey: "sort"
+  },
 
   initialize: function() {
     this.listenTo(this, "error", this.error);
@@ -54,6 +60,6 @@ var Servers = Backbone.PageableCollection.extend({
     setTimeout(function() {
         collection.fetch();
     }, 10000);
-  }
+  },
 
 });
