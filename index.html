@@ -71,12 +71,42 @@
               <table class="server-list">
                 <thead>
                   <tr>
-                    <th style="width: 10%;" data-sort="rank" data-order="asc" data-default-order="asc">Rank</th>
-                    <th style="width: 35%;" data-sort="name" data-order="disabled" data-default-order="asc">Name</th>
-                    <th style="width: 20%;" data-sort="uptime" data-order="disabled" data-default-order="desc">Uptime</th>
-                    <th style="width: 15%;" data-sort="type" data-order="disabled" data-default-order="asc">Type</th>
-                    <th style="width: 10%;" data-sort="latency" data-order="disabled" data-default-order="asc">Ping</th>
-                    <th style="width: 10%;" data-sort="votes" data-order="disabled" data-default-order="desc">Votes</th>
+                    <th style="width: 10%;" data-sort="rank" data-order="asc" data-default-order="asc">
+                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                      <span class="asc glyphicon glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+                      <span class="desc glyphicon glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
+                      Rank
+                    </th>
+                    <th style="width: 35%;" data-sort="name" data-order="disabled" data-default-order="asc">
+                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                      <span class="asc glyphicon glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+                      <span class="desc glyphicon glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+                      Name
+                    </th>
+                    <th style="width: 20%;" data-sort="uptime" data-order="disabled" data-default-order="desc">
+                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                      <span class="asc glyphicon glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                      <span class="desc glyphicon glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                      Uptime
+                    </th>
+                    <th style="width: 15%;" data-sort="type" data-order="disabled" data-default-order="asc">
+                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                      <span class="asc glyphicon glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+                      <span class="desc glyphicon glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+                      Type
+                    </th>
+                    <th style="width: 10%;" data-sort="latency" data-order="disabled" data-default-order="asc">
+                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                      <span class="asc glyphicon glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                      <span class="desc glyphicon glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                      Ping
+                    </th>
+                    <th style="width: 10%;" data-sort="votes" data-order="disabled" data-default-order="desc">
+                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                      <span class="asc glyphicon glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+                      <span class="desc glyphicon glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
+                      Votes
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -190,10 +220,27 @@
         $(".tab-content").css("height", viewportHeight - topOffset - bottomMargin);
       }
 
+      function updateOrderArrows() {
+        $("table.server-list > thead > tr > th").each(function(i, el) {
+          var order = $(el).data("order")
+          if(order == "disabled") {
+            $(el).find(".asc, .desc").hide();
+            $(el).find(".disabled").show();
+          } else if(order == "asc") {
+            $(el).find(".asc").show();
+            $(el).find(".disabled, .desc").hide();
+          } else if(order == "desc") {
+            $(el).find(".desc").show();
+            $(el).find(".disabled, .asc").hide();
+          }
+        });
+      }
+
       viewportSetup();
       $(window).resize(function() {
         viewportSetup();
       });
+      updateOrderArrows();
 
       var loading = false;
       $.ajaxSetup({
@@ -248,24 +295,23 @@
         // disable all the existing orders
         $("table.server-list > thead > tr > th").each(function(i, el) {
           $(el).data("order", "disabled");
-          // TODO: reset the toggly icons (if we need to, might be easier to get css to detect data-order values)
         });
 
         // flip the order or use the default
         if(order == "disabled") {
-          button.data("order", defaultOrder)
+          button.data("order", defaultOrder);
         } else if(order == "asc") {
-          button.data("order", "desc")
+          button.data("order", "desc");
         } else if(order == "desc") {
-          button.data("order", "asc")
+          button.data("order", "asc");
         }
         order = button.data("order")
 
         prefix = orderToPrefix(order)
 
         servers.setSorting(prefix+sort);
+        updateOrderArrows();
         servers.fetch();
-        // TODO: need the little toggly icons
       });
 
       function orderToPrefix(order) {
@@ -275,6 +321,7 @@
           return "-"
         }
       }
+
     </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

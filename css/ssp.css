@@ -122,6 +122,10 @@ table.server-list thead tr th {
   cursor: pointer;
 }
 
+table.server-list thead tr th > .asc, table.server-list thead tr th > .desc, table.server-list thead tr th > .disabled {
+  display: none;
+}
+
 table.server-list thead tr th:hover {
   background-color: #eaeaea;
 }
