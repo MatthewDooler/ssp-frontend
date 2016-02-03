@@ -54,7 +54,7 @@ var EmptyServerTableRow = Backbone.View.extend({
 var ServerTable = Backbone.View.extend({
 
   tagName: "tbody",
-  el: "#server-list-panel > table > tbody",
+  el: "#server-list-panel table.server-list > tbody",
 
   initialize: function() {
     this.listenTo(this.collection, "sync", this.render);
@@ -115,6 +115,7 @@ var ServerView = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+    setupScrollableTabContents(); // make sure our new scrolly div has the correct height
     this.$el.find(".view-server-list-button").click(function() {
       $(this).tab('show');
     });

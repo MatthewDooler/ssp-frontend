@@ -68,53 +68,55 @@
                 </span>
               </div>
 
-              <table class="server-list">
-                <thead>
-                  <tr>
-                    <th style="width: 10%;" data-sort="rank" data-order="asc" data-default-order="asc">
-                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
-                      <span class="asc glyphicon glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
-                      <span class="desc glyphicon glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
-                      Rank
-                    </th>
-                    <th style="width: 35%;" data-sort="name" data-order="disabled" data-default-order="asc">
-                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
-                      <span class="asc glyphicon glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
-                      <span class="desc glyphicon glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
-                      Name
-                    </th>
-                    <th style="width: 20%;" data-sort="uptime" data-order="disabled" data-default-order="desc">
-                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
-                      <span class="asc glyphicon glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                      <span class="desc glyphicon glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                      Uptime
-                    </th>
-                    <th style="width: 15%;" data-sort="type" data-order="disabled" data-default-order="asc">
-                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
-                      <span class="asc glyphicon glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
-                      <span class="desc glyphicon glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
-                      Type
-                    </th>
-                    <th style="width: 10%;" data-sort="latency" data-order="disabled" data-default-order="asc">
-                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
-                      <span class="asc glyphicon glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                      <span class="desc glyphicon glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                      Ping
-                    </th>
-                    <th style="width: 10%;" data-sort="votes" data-order="disabled" data-default-order="desc">
-                      <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
-                      <span class="asc glyphicon glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
-                      <span class="desc glyphicon glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
-                      Votes
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="6" id="server-table-status">Loading...</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="tab-content-scrollable">
+                <table class="server-list">
+                  <thead>
+                    <tr>
+                      <th style="width: 10%;" data-sort="rank" data-order="asc" data-default-order="asc">
+                        <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                        <span class="asc glyphicon glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+                        <span class="desc glyphicon glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
+                        Rank
+                      </th>
+                      <th style="width: 35%;" data-sort="name" data-order="disabled" data-default-order="asc">
+                        <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                        <span class="asc glyphicon glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+                        <span class="desc glyphicon glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+                        Name
+                      </th>
+                      <th style="width: 20%;" data-sort="uptime" data-order="disabled" data-default-order="desc">
+                        <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                        <span class="asc glyphicon glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                        <span class="desc glyphicon glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                        Uptime
+                      </th>
+                      <th style="width: 15%;" data-sort="type" data-order="disabled" data-default-order="asc">
+                        <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                        <span class="asc glyphicon glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+                        <span class="desc glyphicon glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+                        Type
+                      </th>
+                      <th style="width: 10%;" data-sort="latency" data-order="disabled" data-default-order="asc">
+                        <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                        <span class="asc glyphicon glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                        <span class="desc glyphicon glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                        Ping
+                      </th>
+                      <th style="width: 10%;" data-sort="votes" data-order="disabled" data-default-order="desc">
+                        <span class="disabled glyphicon glyphicon glyphicon-sort" aria-hidden="true"></span>
+                        <span class="asc glyphicon glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+                        <span class="desc glyphicon glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
+                        Votes
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="6" id="server-table-status">Loading...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <div id="add-server-panel" class="tab-pane" role="tabpanel">
@@ -126,17 +128,19 @@
                 <span class="panel-title">Add a server</span>
               </div>
 
-              <form role="form">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-              </form>
+              <div class="tab-content-scrollable">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+              </div>
 
             </div>
 
@@ -170,25 +174,27 @@
         <span class="panel-title"><%= name %></span>
       </div>
 
-      <div class="well">
-        <b>Host:</b> <input type="text" value="<%= address %>" readonly="readonly" style="background: none; border: none; width: 200px;" onClick="this.setSelectionRange(0, this.value.length)" /><br />
-        <b>Port:</b> <input type="text" value="<%= port %>" readonly="readonly" style="background: none; border: none; width: 200px;" onClick="this.setSelectionRange(0, this.value.length)" /><br /><br />
-        <div class="uptime-bar" style="width: 200px; display: inline-block;"><div style="width: <%= uptime_percentage %>%;"><%= uptime_percentage %>%</div></div> uptime since <%= new Date(created*1000).toISOString() %><br />
-        <h4><%= rating_pos-rating_neg %> Votes</h4>
-      </div>
+      <div class="tab-content-scrollable">
+        <div class="well">
+          <b>Host:</b> <input type="text" value="<%= address %>" readonly="readonly" style="background: none; border: none; width: 200px;" onClick="this.setSelectionRange(0, this.value.length)" /><br />
+          <b>Port:</b> <input type="text" value="<%= port %>" readonly="readonly" style="background: none; border: none; width: 200px;" onClick="this.setSelectionRange(0, this.value.length)" /><br /><br />
+          <div class="uptime-bar" style="width: 200px; display: inline-block;"><div style="width: <%= uptime_percentage %>%;"><%= uptime_percentage %>%</div></div> uptime since <%= new Date(created*1000).toISOString() %><br />
+          <h4><%= rating_pos-rating_neg %> Votes</h4>
+        </div>
 
-      <div class="well">
-        <h3>Information</h3>
-        <%= description_formatted %>
-      </div>
+        <div class="well">
+          <h3>Information</h3>
+          <%= description_formatted %>
+        </div>
 
-      <div class="well">
-        <h3>Share</h3>
-        Advertise this server by embedding a live banner.<br />
-        <img src="http://www.serverstatuspage.com/status/uptime.php?id=<%= id %>" /><br />
-        <div style="width: 400px; text-align: left;">
-          <div style="font-size: 12px;">HTML code:</div>
-          <div style="font-size: 10px; font-family: monospace; background-color: #eeeeee; border: 1px solid #333333;">&lt;img src="http://www.serverstatuspage.com/status/uptime.php?id=<%= id %>" /&gt;</div>
+        <div class="well">
+          <h3>Share</h3>
+          Advertise this server by embedding a live banner.<br />
+          <img src="http://www.serverstatuspage.com/status/uptime.php?id=<%= id %>" /><br />
+          <div style="width: 400px; text-align: left;">
+            <div style="font-size: 12px;">HTML code:</div>
+            <div style="font-size: 10px; font-family: monospace; background-color: #eeeeee; border: 1px solid #333333;">&lt;img src="http://www.serverstatuspage.com/status/uptime.php?id=<%= id %>" /&gt;</div>
+          </div>
         </div>
       </div>
 
@@ -212,12 +218,12 @@
     <script src="js/views.js"></script>
     <script>
 
-      function viewportSetup() {
+      function setupScrollableTabContents() {
         var viewportWidth = $(window).width();
         var viewportHeight = $(window).height();
-        var topOffset = $(".tab-content").get(0).getBoundingClientRect().top;
+        var topOffset = $(".tab-content-scrollable").get(0).getBoundingClientRect().top;
         var bottomMargin = 0;
-        $(".tab-content").css("height", viewportHeight - topOffset - bottomMargin);
+        $(".tab-content-scrollable").css("height", viewportHeight - topOffset - bottomMargin);
       }
 
       function updateOrderArrows() {
@@ -241,9 +247,9 @@
         servers.setSorting("-sponsored,"+field);
       }
 
-      viewportSetup();
+      setupScrollableTabContents();
       $(window).resize(function() {
-        viewportSetup();
+        setupScrollableTabContents();
       });
       updateOrderArrows();
 
