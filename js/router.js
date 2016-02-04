@@ -49,4 +49,5 @@ app.on('route:default', function(actions) {
 	$("<div/>").data("target", "#not-found-error-panel").tab('show');
 });
 
+// TODO: pushState would let us use real urls - however the backend has to support it, and it doesn't work locally
 Backbone.history.start();
