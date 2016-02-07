@@ -50,4 +50,5 @@ app.on('route:default', function(actions) {
 });
 
 // TODO: pushState would let us use real urls - however the backend has to support it, and it doesn't work locally
-Backbone.history.start();
+//Backbone.history.start();
+Backbone.history.start({pushState: true});
