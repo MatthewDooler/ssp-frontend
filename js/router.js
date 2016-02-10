@@ -31,7 +31,6 @@ app.on('route:viewServersByPage', function(page) {
 
 app.on('route:viewServer', function(slug) {
 	var button = $("<div/>").data("target", "#view-server-panel");
-	// TODO: request from server using slug, not ID
 	var server = new Server({ id: slug });
 	var serverView = new ServerView({ model: server });
 
