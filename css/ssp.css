@@ -17,6 +17,7 @@ html, body {
   background-repeat: no-repeat, repeat;
   border-bottom: 1px solid #bbbbbb;
   height: 110px;
+  cursor: pointer;
 }
 .site-header h1 {
   margin: 0;

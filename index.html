@@ -292,6 +292,10 @@
         }
       });
 
+      $(".site-header").click(function() {
+        app.navigate("/", {trigger: true});
+      });
+
       // TODO: these should be attached to the view. that means the server list template needs the control buttons too.
       $("#refresh-servers").click(function() {
         servers.fetch();
