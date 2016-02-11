@@ -258,3 +258,23 @@ tr.sponsored:hover td {
 tr.sponsored td div.rank-val { /* dummy div to allow height adjustment */
   padding: 30px 0 30px 0;
 }
+
+
+
+.auth-title {
+  font-size: 25px;
+  margin: 5px 0 10px 0;
+}
+.auth-title .loud {
+  font-weight: bold;
+}
+.auth-title .quiet {
+}
+
+.registration-notice {
+  margin-top: 10px;
+}
+
+.login-remember-me {
+  margin: 0 0 10px 3px;
+}
