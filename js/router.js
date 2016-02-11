@@ -2,6 +2,7 @@ var AppRouter = Backbone.Router.extend({
     routes: {
         "": "viewServers",
         "add": "addServer",
+        "signup": "signup",
         "servers": "viewServers",
         "servers/page/:page": "viewServersByPage",
         "servers/:slug": "viewServer",
@@ -13,6 +14,11 @@ var app = new AppRouter;
 
 app.on('route:addServer', function() {
 	$(".add-server-button").tab('show');
+});
+
+app.on('route:signup', function() {
+	$(".modal").modal('hide');
+	$(".signup-button").tab('show');
 });
 
 servers = new Servers;

@@ -279,3 +279,18 @@ tr.sponsored td div.rank-val { /* dummy div to allow height adjustment */
 .login-remember-me {
   margin: 0 0 10px 3px;
 }
+
+
+.login-compact {
+  margin: auto;
+  width: 300px;
+}
+.login-compact input {
+  margin: 5px 0 5px 0;
+}
+.login-compact button {
+  width: 100%;
+}
+.login-compact .login-remember-me {
+  margin: 0;
+}
