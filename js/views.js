@@ -102,9 +102,6 @@ var ServerView = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
     setupScrollableTabContents(); // make sure our new scrolly div has the correct height
-    this.$el.find(".view-server-list-button").click(function() {
-      app.navigate("servers", {trigger: true});
-    });
     return this;
   }
 });
