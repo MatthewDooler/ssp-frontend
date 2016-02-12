@@ -194,7 +194,7 @@
 
             <div id="signup-panel" class="tab-pane" role="tabpanel">
               <div class="panel-controls" role="tablist">
-                <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back to server list">
+                <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back to server list"><!-- TODO: this should just be a back button -->
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </button>
                 <span class="panel-title">Sign up</span>
@@ -393,7 +393,7 @@
     <script type="text/template" id="tpl-view-server">
 
       <div class="panel-controls" role="tablist">
-        <button type="button" class="btn btn-default" aria-label="Back" onclick="history.go(-1);">
+        <button type="button" class="btn btn-default" aria-label="Back to server list" onclick="app.navigate('servers', {trigger: true});"> 
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
         </button>
         <span class="panel-title"><%= name %></span>
