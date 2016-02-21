@@ -294,3 +294,13 @@ tr.sponsored td div.rank-val { /* dummy div to allow height adjustment */
 .login-compact .login-remember-me {
   margin: 0;
 }
+
+
+.tos-indent {
+  padding-left: 30px;
+  max-width: 900px;
+  text-align: justify;
+}
+.tos-indent h3 {
+  color: #444444;
+}
