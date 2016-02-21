@@ -131,7 +131,7 @@
             <div id="add-server-panel" class="tab-pane" role="tabpanel">
 
               <div class="panel-controls" role="tablist">
-                <button type="button" class="btn btn-default" aria-label="Back" onclick="history.go(-1);">
+                <button type="button" class="btn btn-default" aria-label="Back" onclick="back();">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </button>
                 <span class="panel-title">Add a server</span>
@@ -194,7 +194,7 @@
 
             <div id="signup-panel" class="tab-pane" role="tabpanel">
               <div class="panel-controls" role="tablist">
-                <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back to server list"><!-- TODO: this should just be a back button -->
+                <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back" onclick="back();">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </button>
                 <span class="panel-title">Sign up</span>
@@ -226,7 +226,7 @@
 
             <div id="privacy-panel" class="tab-pane" role="tabpanel">
               <div class="panel-controls" role="tablist">
-                <button type="button" class="btn btn-default" aria-label="Back" onclick="history.go(-1);">
+                <button type="button" class="btn btn-default" aria-label="Back" onclick="back();">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </button>
                 <span class="panel-title">Privacy Policy</span>
@@ -313,7 +313,7 @@
 
             <div id="tos-panel" class="tab-pane" role="tabpanel">
               <div class="panel-controls" role="tablist">
-                <button type="button" class="btn btn-default" aria-label="Back" onclick="history.go(-1);">
+                <button type="button" class="btn btn-default" aria-label="Back" onclick="back();">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </button>
                 <span class="panel-title">Terms of Service</span>
@@ -491,7 +491,7 @@
 
             <div id="cookies-panel" class="tab-pane" role="tabpanel">
               <div class="panel-controls" role="tablist">
-                <button type="button" class="btn btn-default" aria-label="Back" onclick="history.go(-1);">
+                <button type="button" class="btn btn-default" aria-label="Back" onclick="back();">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </button>
                 <span class="panel-title">Cookie Use</span>
@@ -559,7 +559,7 @@
     <script type="text/template" id="tpl-view-server">
 
       <div class="panel-controls" role="tablist">
-        <button type="button" class="btn btn-default" aria-label="Back to server list" onclick="app.navigate('servers', {trigger: true});"> 
+        <button type="button" class="btn btn-default" aria-label="Back" onclick="back({destination:'servers'});"> 
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
         </button>
         <span class="panel-title"><%= name %></span>

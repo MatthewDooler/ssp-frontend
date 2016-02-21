@@ -34,3 +34,11 @@ function orderToPrefix(order) {
     return "-"
   }
 }
+
+function back(options) {
+  if(typeof options !== 'undefined' && "destination" in options) {
+    app.navigate(options.destination, {trigger: true});
+  } else {
+    history.go(-1);
+  }
+}
