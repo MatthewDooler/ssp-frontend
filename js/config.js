@@ -14,6 +14,6 @@ function get_environment() {
 function get_api_endpoint(environment) {
 	switch (environment) {
 		case 'dev': return 'http://127.0.0.1:5000'
-		case 'production': return 'https://ssp-api-v2.herokuapp.com'
+		case 'production': return 'https://api.serverstatuspage.com'
 	}
 }
