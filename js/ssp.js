@@ -11,7 +11,7 @@ var Storage = {
 };
 
 $(document).ajaxSend(function(event, request) {
-   var token = getAuthenticationToken(); // TODO: what if it's not set?
+   var token = session.get("authentication_token");
    if (token) {
       request.setRequestHeader("Authorization", token);
    }
@@ -62,27 +62,23 @@ function back(options) {
   }
 }
 
-function login(user) {
-  Storage.set("user", {"id": user.get("id"), "authentication_token": user.get("authentication_token")});
+function login(model) {
+  Storage.set("session", {"id": model.get("id"), "authentication_token": model.get("authentication_token")});
+  session.set({ id: model.get("id"), authentication_token: model.get("authentication_token")});
 }
 
-function getAuthenticationToken() {
-  if (Storage.get("user") != null) {
-    return Storage.get("user").authentication_token;
+function getStoredAuthenticationToken() {
+  if (Storage.get("session") != null) {
+    return Storage.get("session").authentication_token;
   } else {
     return null;
   }
 }
 
-function getUserId() {
-  if (Storage.get("user") != null) {
-    return Storage.get("user").id;
+function getStoredUserId() {
+  if (Storage.get("session") != null) {
+    return Storage.get("session").id;
   } else {
     return null;
   }
-}
-
-function logout() {
-  // TODO: this only logs out the client - it doesn't revoke the session key
-  Storage.delete("user")
 }

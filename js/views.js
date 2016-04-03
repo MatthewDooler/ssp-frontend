@@ -1,12 +1,37 @@
+var AuthControlView = Backbone.View.extend({
+  el: ".auth-control",
+  template: _.template( $('#tpl-auth-control').html()),
+
+  events: {
+    "click .logout": "logout"
+  },
+
+  initialize: function() {
+    this.listenTo(this.model, "change", this.render);
+    this.render();
+  },
+
+  render: function() {
+    // TODO: what is the model? the user? the session? globally defined or attached to this view?
+    console.log(this.model.toJSON())
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  },
+
+  logout: function() {
+    // TODO: this only logs out the client. need to do a DELETE request to revoke the token
+    Storage.delete("session")
+    this.model.set({ id: null, authentication_token: null});
+  }
+});
+
 var ServerTableRow = Backbone.View.extend({
 
   tagName: "tr",
   template: _.template( $('#tpl-server-row').html()),
 
   events: {
-    "click .icon":          "open",
-    "click .button.edit":   "openEditDialog",
-    "click .button.delete": "destroy"
+    "click": "open",
   },
 
   initialize: function() {
@@ -16,15 +41,11 @@ var ServerTableRow = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
     if(this.model.get("sponsored") == 1) this.$el.addClass("sponsored");
-
-    var slug = this.model.get("slug");
-    this.$el.click(function() {
-        // TODO: make sure we don't re-attach handlers to old elements when we're doing fancy re-rendering
-        console.log("handling view-server click for " + slug);
-        app.navigate("servers/"+slug, {trigger: true});
-    });
-
     return this;
+  },
+
+  open: function() {
+    app.navigate("servers/" + this.model.get("slug"), {trigger: true});
   }
 });
 
@@ -88,12 +109,6 @@ var ServerView = Backbone.View.extend({
   tagName: "div",
   template: _.template( $('#tpl-view-server').html()),
   el: "#view-server-panel > #view-server-panel-content",
-
-  events: {
-    "click .icon":          "open",
-    "click .button.edit":   "openEditDialog",
-    "click .button.delete": "destroy"
-  },
 
   initialize: function() {
     this.listenTo(this.model, "change", this.render);

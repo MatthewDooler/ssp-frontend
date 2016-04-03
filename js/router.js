@@ -2,6 +2,9 @@ servers = new Servers;
 sortServers("rank");
 serverTable = new ServerTable({ collection: servers });
 
+session = new Session({ id: getStoredUserId(), authentication_token: getStoredAuthenticationToken()})
+authControlView = new AuthControlView({ model: session });
+
 $("form.signup").each(function(i, form) {
 	new SignUpForm({el: form});
 });

@@ -34,7 +34,7 @@ html, body {
   margin-top: 0px;
 }
 
-div.flag-drop {
+div.auth-control {
     position: absolute;
     top: 0px;
     right: 15px;
@@ -46,11 +46,11 @@ div.flag-drop {
     border-top: none;
     font-weight: bold;
 }
-div.flag-drop a {
+div.auth-control a {
   text-decoration: none;
   color: black;
 }
-div.flag-drop > span {
+div.auth-control > span {
     color: #cccccc;
     font-weight: normal;
     font-size: 13px;
