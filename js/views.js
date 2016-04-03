@@ -123,9 +123,6 @@ var SignUpForm = Backbone.View.extend({
   },
 
   initialize: function() {
-    // TODO: If we signup a user, then signup another user later using the same form, isn't
-    //       backbone going to keep the view attached to the old user? And therefore PUT instead of POST?
-    //       Maybe re-initialise this variable once the request succeeds? (after storing it somewhere global)
     this.model = new User();
   },
 
