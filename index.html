@@ -236,6 +236,7 @@
               </div>
               <div class="tab-content-scrollable">
                 Logged in
+                <!-- TODO: some sort of user dashboard. need a flash if the account was just created, or if we just logged in. maybe redirect to the page the user originally wanted. new users are going to want to just add their server and don't want to update their password lol. -->
               </div>
             </div>
 
@@ -542,8 +543,14 @@
             
             <div class="login-compact">
               <form role="form" class="login">
-                <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
-                <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
+                <div class="form-group">
+                  <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
+                  <span class="help-block"></span>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
+                  <span class="help-block"></span>
+                </div>
                 <div class="login-remember-me">
                   <label>
                     <input type="checkbox" value="1" name="remember">

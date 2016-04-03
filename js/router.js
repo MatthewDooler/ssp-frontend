@@ -1,3 +1,15 @@
+servers = new Servers;
+sortServers("rank");
+serverTable = new ServerTable({ collection: servers });
+
+$("form.signup").each(function(i, form) {
+	new SignUpForm({el: form});
+});
+
+$("form.login").each(function(i, form) {
+	new LogInForm({el: form});
+});
+
 var AppRouter = Backbone.Router.extend({
     routes: {
         "": "viewServers",
@@ -41,14 +53,6 @@ app.on('route:user', function() {
 	$(".modal").modal('hide');
 	$("<div/>").data("target", "#user-panel").tab('show');
 });
-
-servers = new Servers;
-sortServers("rank");
-serverTable = new ServerTable({ collection: servers });
-
-$("form.signup").each(function(i, form) {
-	new SignUpForm({el: form});
-})
 
 app.on('route:viewServers', function() {
 	servers.fetch();

@@ -115,15 +115,12 @@ function flashSiteError(e) {
   }, 5000);
 }
 
-var SignUpForm = Backbone.View.extend({
+// A generic form view we can use around the website
+var FormView = Backbone.View.extend({
   events: {
     "submit": "submit",
     "change": "change",
     "keyup": "change"
-  },
-
-  initialize: function() {
-    this.model = new User();
   },
 
   change: function(e) {
@@ -142,25 +139,45 @@ var SignUpForm = Backbone.View.extend({
 
     var view = this;
     this.model.save(null, {
-      success: function(user, result, xhr) {
-        // TODO: pass the user model into the user view
-        login(user);
-        view.model = new User();
+      success: function(model, result, xhr) {
         resetForm(form);
-        console.log("success");
-        console.log(result);
-        app.navigate("user", {trigger: true});
+        view.success(model, result)
       },
-      error: function(user, result, xhr) {
+      error: function(model, result, xhr) {
         resetInputErrors(form);
         errors = result.responseJSON;
         for (var field in errors) {
           input = form.find('input[name=\''+field+'\']');
           setInputErrors(input, errors[field]);
         }
-        console.log(result)
       }
     });
+  }
+});
+
+var SignUpForm = FormView.extend({
+  initialize: function() {
+    this.model = new User();
+  },
+  success: function(user, result) {
+    // TODO: pass the user model into the user view (this would just be an optimisation, since the user view would usually load that itself)
+    login(user);
+    this.model = new User();
+    // TODO: remove these log lines
+    console.log("success");
+    console.log(result);
+    app.navigate("user", {trigger: true});
+  }
+});
+
+var LogInForm = FormView.extend({
+  initialize: function() {
+    this.model = new Session();
+  },
+  success: function(session, result) {
+    login(session);
+    this.model = new Session();
+    app.navigate("user", {trigger: true});
   }
 });
 

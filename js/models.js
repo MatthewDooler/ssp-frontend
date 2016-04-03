@@ -70,3 +70,10 @@ var User = Backbone.Model.extend({
     return { user: _.clone( this.attributes ) }
   }
 });
+
+var Session = Backbone.Model.extend({
+  urlRoot: settings.apiEndpoint + '/sessions',
+  toJSON: function() {
+    return { session: _.clone( this.attributes ) }
+  }
+});
