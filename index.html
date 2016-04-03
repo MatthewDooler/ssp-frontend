@@ -143,14 +143,16 @@
                   <div class="col-md-5">
                     <div style="border-right: 1px solid #aaaaaa; padding-right: 50px;">
                       <h2>New? <small>Sign up first to add your server</small></h2>
-                      <form role="form">
+                      <form role="form" class="signup">
                         <div class="form-group">
                           <label for="emailInput">Email</label>
-                          <input type="email" class="form-control" id="emailInput" placeholder="Email">
+                          <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
+                          <span class="help-block"></span>
                         </div>
                         <div class="form-group">
                           <label for="passwordInput">Password</label>
-                          <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                          <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
+                          <span class="help-block"></span>
                         </div>
                         <button type="submit" class="btn btn-primary">Continue</button>
 
@@ -162,14 +164,16 @@
                   <div class="col-md-5">
                     <div style="padding-left: 20px; padding-right: 30px;">
                       <h2>Already signed up? <small>Log in</small></h2>
-                      <form role="form">
+                      <form role="form" class="login">
                         <div class="form-group">
                           <label for="emailInput">Email</label>
-                          <input type="email" class="form-control" id="emailInput" placeholder="Email">
+                          <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
+                          <span class="help-block"></span>
                         </div>
                         <div class="form-group">
                           <label for="passwordInput">Password</label>
-                          <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                          <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
+                          <span class="help-block"></span>
                         </div>
                         
                         <div class="login-remember-me">
@@ -200,14 +204,16 @@
                 <span class="panel-title">Sign up</span>
               </div>
               <div class="tab-content-scrollable">
-                <form role="form">
+                <form role="form" class="signup">
                   <div class="form-group">
                     <label for="emailInput">Email</label>
-                    <input type="email" class="form-control" id="emailInput" placeholder="Email">
+                    <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
+                    <span class="help-block"></span>
                   </div>
                   <div class="form-group">
                     <label for="passwordInput">Password</label>
-                    <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
+                    <span class="help-block"></span>
                   </div>
                   <button type="submit" class="btn btn-primary">Sign up</button>
                   <div class="registration-notice"><small>By signing up, you agree to the <a href="#tos">Terms of Service</a> and <a href="#privacy">Privacy Policy</a>, including <a href="#cookies">Cookie Use</a>.</small></div>
@@ -303,7 +309,7 @@
                 If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at:<br>
                 <a href="http://www.serverstatuspage.com/">ServerStatusPage</a><br>
                 <a href="http://www.serverstatuspage.com/">http://www.serverstatuspage.com/</a><br>
-                contact@serverstatuspage.com<br>
+                support@serverstatuspage.com<br>
                 <br>
                 <i>Effective: February 11, 2016</i>
                 <br>
@@ -523,9 +529,9 @@
           <div class="modal-body">
             
             <div class="login-compact">
-              <form role="form">
-                <input type="email" class="form-control" id="emailInput" placeholder="Email">
-                <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+              <form role="form" class="login">
+                <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
+                <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
                 <div class="login-remember-me">
                   <label>
                     <input type="checkbox" value="1" name="remember">

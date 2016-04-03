@@ -63,3 +63,10 @@ var Servers = Backbone.PageableCollection.extend({
   },
 
 });
+
+var User = Backbone.Model.extend({
+  urlRoot: settings.apiEndpoint + '/user',
+  toJSON: function() {
+    return { user: _.clone( this.attributes ) }
+  }
+});

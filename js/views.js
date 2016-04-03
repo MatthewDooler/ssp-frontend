@@ -115,3 +115,70 @@ function flashSiteError(e) {
   }, 5000);
 }
 
+var SignUpForm = Backbone.View.extend({
+  events: {
+    "submit": "submit",
+    "change": "change",
+    "keyup": "change"
+  },
+
+  initialize: function() {
+    // TODO: If we signup a user, then signup another user later using the same form, isn't
+    //       backbone going to keep the view attached to the old user? And therefore PUT instead of POST?
+    //       Maybe re-initialise this variable once the request succeeds? (after storing it somewhere global)
+    this.model = new User();
+  },
+
+  change: function(e) {
+    setInputErrors($(e.target), [])
+  },
+
+  submit: function(e) {
+    e.preventDefault();
+    var model = this.model;
+    var form = this.$el;
+
+    // Update the model with the values from the form
+    form.find('input').each(function(i, input) {
+      model.set(input.getAttribute("name"), input.value);
+    });
+
+    this.model.save(null, {
+      success: function(model, result, xhr) {
+        // TODO: save the session key etc and do something cool
+        resetInputErrors(form);
+        console.log("success")
+        console.log(result)
+      },
+      error: function(model, result, xhr) {
+        resetInputErrors(form);
+        errors = result.responseJSON;
+        for (var field in errors) {
+          input = form.find('input[name=\''+field+'\']');
+          setInputErrors(input, errors[field]);
+        }
+        console.log(result)
+      }
+    });
+  }
+});
+
+function resetInputErrors(form) {
+  form.find("input").each(function(i, input) {
+    setInputErrors($(input), [])
+  });
+}
+
+function setInputErrors(input, errors) {
+  var formGroup = input.parent();
+  var helpBlock = formGroup.find(".help-block")
+  if(errors.length > 0) {
+    formGroup.addClass("has-error");
+    helpBlock.text(errors) // TODO: array to csv (and test it!!)
+  } else {
+    formGroup.removeClass("has-error");
+    helpBlock.text("")
+  }
+}
+
+

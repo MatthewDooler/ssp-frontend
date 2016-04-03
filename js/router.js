@@ -40,6 +40,10 @@ servers = new Servers;
 sortServers("rank");
 serverTable = new ServerTable({ collection: servers });
 
+$("form.signup").each(function(i, form) {
+	new SignUpForm({el: form});
+})
+
 app.on('route:viewServers', function() {
 	servers.fetch();
 	$(".view-server-list-button").tab('show');
