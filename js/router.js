@@ -6,6 +6,7 @@ var AppRouter = Backbone.Router.extend({
         "tos": "tos",
         "cookies": "cookies",
         "signup": "signup",
+        "user": "user",
         "servers": "viewServers",
         "servers/page/:page": "viewServersByPage",
         "servers/:slug": "viewServer",
@@ -16,15 +17,15 @@ var AppRouter = Backbone.Router.extend({
 var app = new AppRouter;
 
 app.on('route:privacy', function(slug) {
-	$("<div/>").data("target", "#privacy-panel").tab('show');;
+	$("<div/>").data("target", "#privacy-panel").tab('show');
 });
 
 app.on('route:tos', function(slug) {
-	$("<div/>").data("target", "#tos-panel").tab('show');;
+	$("<div/>").data("target", "#tos-panel").tab('show');
 });
 
 app.on('route:cookies', function(slug) {
-	$("<div/>").data("target", "#cookies-panel").tab('show');;
+	$("<div/>").data("target", "#cookies-panel").tab('show');
 });
 
 app.on('route:addServer', function() {
@@ -34,6 +35,11 @@ app.on('route:addServer', function() {
 app.on('route:signup', function() {
 	$(".modal").modal('hide');
 	$(".signup-button").tab('show');
+});
+
+app.on('route:user', function() {
+	$(".modal").modal('hide');
+	$("<div/>").data("target", "#user-panel").tab('show');
 });
 
 servers = new Servers;

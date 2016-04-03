@@ -1,3 +1,22 @@
+var Storage = {
+    set: function(key, value) {
+        localStorage[key] = JSON.stringify(value);
+    },
+    get: function(key) {
+        return localStorage[key] ? JSON.parse(localStorage[key]) : null;
+    },
+    delete: function(key) {
+      delete localStorage[key]
+    }
+};
+
+$(document).ajaxSend(function(event, request) {
+   var token = getAuthenticationToken(); // TODO: what if it's not set?
+   if (token) {
+      request.setRequestHeader("Authorization", token);
+   }
+});
+
 function setupScrollableTabContents() {
   var viewportWidth = $(window).width();
   var viewportHeight = $(window).height();
@@ -41,4 +60,29 @@ function back(options) {
   } else {
     history.go(-1);
   }
+}
+
+function login(user) {
+  Storage.set("user", {"id": user.get("id"), "authentication_token": user.get("authentication_token")});
+}
+
+function getAuthenticationToken() {
+  if (Storage.get("user") != null) {
+    return Storage.get("user").authentication_token;
+  } else {
+    return null;
+  }
+}
+
+function getUserId() {
+  if (Storage.get("user") != null) {
+    return Storage.get("user").id;
+  } else {
+    return null;
+  }
+}
+
+function logout() {
+  // TODO: this only logs out the client - it doesn't revoke the session key
+  Storage.delete("user")
 }

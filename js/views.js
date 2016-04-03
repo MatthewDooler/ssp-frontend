@@ -143,14 +143,18 @@ var SignUpForm = Backbone.View.extend({
       model.set(input.getAttribute("name"), input.value);
     });
 
+    var view = this;
     this.model.save(null, {
-      success: function(model, result, xhr) {
-        // TODO: save the session key etc and do something cool
-        resetInputErrors(form);
-        console.log("success")
-        console.log(result)
+      success: function(user, result, xhr) {
+        // TODO: pass the user model into the user view
+        login(user);
+        view.model = new User();
+        resetForm(form);
+        console.log("success");
+        console.log(result);
+        app.navigate("user", {trigger: true});
       },
-      error: function(model, result, xhr) {
+      error: function(user, result, xhr) {
         resetInputErrors(form);
         errors = result.responseJSON;
         for (var field in errors) {
@@ -162,6 +166,13 @@ var SignUpForm = Backbone.View.extend({
     });
   }
 });
+
+function resetForm(form) {
+  form.find("input").each(function(i, input) {
+    input.value = "";
+  });
+  resetInputErrors(form);
+}
 
 function resetInputErrors(form) {
   form.find("input").each(function(i, input) {
