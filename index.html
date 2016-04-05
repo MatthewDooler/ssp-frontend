@@ -128,73 +128,7 @@
               </div>
             </div>
 
-            <div id="add-server-panel" class="tab-pane" role="tabpanel">
-
-              <div class="panel-controls" role="tablist">
-                <button type="button" class="btn btn-default" aria-label="Back" onclick="back();">
-                  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                </button>
-                <span class="panel-title">Add a server</span>
-              </div>
-
-              <div class="tab-content-scrollable">
-
-                <div class="row">
-                  <div class="col-md-5">
-                    <div style="border-right: 1px solid #aaaaaa; padding-right: 50px;">
-                      <h2>New? <small>Sign up first to add your server</small></h2>
-                      <form role="form" class="signup">
-                        <div class="form-group">
-                          <label for="emailInput">Email</label>
-                          <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
-                          <span class="help-block"></span>
-                        </div>
-                        <div class="form-group">
-                          <label for="passwordInput">Password</label>
-                          <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
-                          <span class="help-block"></span>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Continue</button>
-
-                        <div class="registration-notice"><small>By signing up, you agree to the <a href="#tos">Terms of Service</a> and <a href="#privacy">Privacy Policy</a>, including <a href="#cookies">Cookie Use</a>.</small></div>
-                      </form>
-                    </div>
-                  </div>
-
-                  <div class="col-md-5">
-                    <div style="padding-left: 20px; padding-right: 30px;">
-                      <h2>Already signed up? <small>Log in</small></h2>
-                      <form role="form" class="login">
-                        <div class="form-group">
-                          <label for="emailInput">Email</label>
-                          <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
-                          <span class="help-block"></span>
-                        </div>
-                        <div class="form-group">
-                          <label for="passwordInput">Password</label>
-                          <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
-                          <span class="help-block"></span>
-                        </div>
-                        
-                        <div class="login-remember-me">
-                          <label>
-                            <input type="checkbox" value="1" name="remember">
-                            <span><small>Remember me</small></span>
-                          </label>
-                          <span class="separator">·</span>
-                          <a class="forgot" href="#TODO"><small>Forgot password?</small></a>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Log in</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-
+            <div id="add-server-panel" class="tab-pane" role="tabpanel"></div>
 
             <div id="signup-panel" class="tab-pane" role="tabpanel">
               <div class="panel-controls" role="tablist">
@@ -578,6 +512,77 @@
       <% } else { %>
         <a data-toggle="modal" href="#login">Log in</a> <span>|</span> <a class="signup-button" href="#signup" data-target="#signup-panel">Sign up</a>
       <% } %>
+    </script>
+
+    <script type="text/template" id="tpl-add-server">
+      <div class="panel-controls" role="tablist">
+        <button type="button" class="btn btn-default" aria-label="Back" onclick="back();">
+          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        </button>
+        <span class="panel-title">Add a server</span>
+      </div>
+
+      <div class="tab-content-scrollable">
+
+        <% if (session.id != null) { %>
+          <div>get ready to ADD YOUR SERVER, WOOP (TODO)</div>
+        <% } else { %>
+          <div class="row">
+            <div class="col-md-5">
+              <div style="border-right: 1px solid #aaaaaa; padding-right: 50px;">
+                <h2>New? <small>Sign up first to add your server</small></h2>
+                <form role="form" class="signup">
+                  <div class="form-group">
+                    <label for="emailInput">Email</label>
+                    <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
+                    <span class="help-block"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
+                    <span class="help-block"></span>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Continue</button>
+
+                  <div class="registration-notice"><small>By signing up, you agree to the <a href="#tos">Terms of Service</a> and <a href="#privacy">Privacy Policy</a>, including <a href="#cookies">Cookie Use</a>.</small></div>
+                </form>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <div style="padding-left: 20px; padding-right: 30px;">
+                <h2>Already signed up? <small>Log in</small></h2>
+                <form role="form" class="login">
+                  <div class="form-group">
+                    <label for="emailInput">Email</label>
+                    <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email">
+                    <span class="help-block"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
+                    <span class="help-block"></span>
+                  </div>
+                  
+                  <div class="login-remember-me">
+                    <label>
+                      <input type="checkbox" value="1" name="remember">
+                      <span><small>Remember me</small></span>
+                    </label>
+                    <span class="separator">·</span>
+                    <a class="forgot" href="#TODO"><small>Forgot password?</small></a>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Log in</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } %>
+
+
+
     </script>
 
     <script type="text/template" id="tpl-server-row">

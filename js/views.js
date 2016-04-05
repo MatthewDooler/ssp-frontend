@@ -8,12 +8,10 @@ var AuthControlView = Backbone.View.extend({
 
   initialize: function() {
     this.listenTo(this.model, "change", this.render);
-    this.render();
+    this.render(); // TODO: sometimes doesn't render on first/slow page load. not sure why.. possibly dom isn't ready when we create the obj?
   },
 
   render: function() {
-    // TODO: what is the model? the user? the session? globally defined or attached to this view?
-    console.log(this.model.toJSON())
     this.$el.html(this.template(this.model.toJSON()));
     return this;
   },
@@ -22,6 +20,22 @@ var AuthControlView = Backbone.View.extend({
     // TODO: this only logs out the client. need to do a DELETE request to revoke the token
     Storage.delete("session")
     this.model.set({ id: null, authentication_token: null});
+  }
+});
+
+var AddServerView = Backbone.View.extend({
+  el: "#add-server-panel",
+  template: _.template( $('#tpl-add-server').html()),
+
+  initialize: function() {
+    this.listenTo(this.model, "change", this.render);
+    this.render();
+  },
+
+  render: function() {
+    console.log(this.model.toJSON())
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
   }
 });
 
