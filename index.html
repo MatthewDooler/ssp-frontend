@@ -39,6 +39,7 @@
 
 
       <div class="alert alert-danger" id="site-error"></div>
+      <div class="alert alert-success" id="site-success"></div>
       <div class="alert alert-info" id="loading-indicator"></div>
 
       <div class="row">
@@ -161,16 +162,16 @@
             </div>
 
 
-            <div id="user-panel" class="tab-pane" role="tabpanel">
+            <div id="settings-panel" class="tab-pane" role="tabpanel">
               <div class="panel-controls" role="tablist">
                 <button type="button" class="btn btn-default view-server-list-button" data-target="#server-list-panel" aria-label="Back" onclick="back();">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </button>
-                <span class="panel-title">User</span>
+                <span class="panel-title">Settings</span>
               </div>
-              <div class="tab-content-scrollable">
-                Logged in
-                <!-- TODO: some sort of user dashboard. need a flash if the account was just created, or if we just logged in. maybe redirect to the page the user originally wanted. new users are going to want to just add their server and don't want to update their password lol. -->
+              <div class="tab-content-scrollable settings">
+                <!-- TODO: need a flash if the account was just created, or if we just logged in. maybe redirect to the page the user originally wanted. new users are going to want to just add their server and don't want to update their password lol. -->
+
               </div>
             </div>
 
@@ -508,9 +509,38 @@
 
     <script type="text/template" id="tpl-auth-control">
       <% if (session.id != null) { %>
+        <a href="#settings">Settings</a>
+        <span>|</span>
         <a href="javascript:;" class="logout">Log out</a>
       <% } else { %>
-        <a data-toggle="modal" href="#login">Log in</a> <span>|</span> <a class="signup-button" href="#signup" data-target="#signup-panel">Sign up</a>
+        <a data-toggle="modal" href="#login">Log in</a>
+        <span>|</span>
+        <a class="signup-button" href="#signup" data-target="#signup-panel">Sign up</a>
+      <% } %>
+    </script>
+
+    <script type="text/template" id="tpl-settings">
+      <% if (user.id != null) { %>
+        <% if (user.email != null) { %>
+          <h5>Change your basic account and language settings.</h5>
+          <form role="form" class="settings">
+            <div class="form-group">
+              <label for="emailInput">Email</label>
+              <input type="email" class="form-control" id="emailInput" name="email" value="<%= user.email %>">
+              <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+              <label for="passwordInput">Password</label>
+              <input type="password" class="form-control" id="passwordInput" placeholder="Leave blank to remain unchanged" name="password">
+              <span class="help-block"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        <% } else { %>
+          Loading...
+        <% } %>
+      <% } else { %>
+        Not logged in
       <% } %>
     </script>
 
@@ -653,25 +683,6 @@
         setupScrollableTabContents();
       });
       updateOrderArrows();
-
-      var loading = false;
-      $.ajaxSetup({
-        beforeSend: function() {
-          loading = true
-          ignorePeriod = 100 // don't display anything if load completes within this time
-          setTimeout(function() {
-            if(loading) {
-              $("#loading-indicator").show().animate({'top': '5px'}, 100).html("Loading...");
-            }
-          }, ignorePeriod);
-        },
-        complete: function() {
-          loading = false
-          $("#loading-indicator").fadeOut(function() {
-            $(this).css('top', '-100px')
-          });
-        }
-      });
 
       $(".site-header").click(function() {
         app.navigate("/", {trigger: true});

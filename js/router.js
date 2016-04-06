@@ -2,17 +2,17 @@ servers = new Servers;
 sortServers("rank");
 serverTable = new ServerTable({ collection: servers });
 
-session = new Session({ id: getStoredUserId(), authentication_token: getStoredAuthenticationToken()})
+var session = new Session();
+var user = new User();
+login(getStoredUserId(), getStoredAuthenticationToken())
+
 authControlView = new AuthControlView({ model: session });
-addServerView = new AddServerView({ model: session });
+addServerView = new AddServerView({ model: user });
 
-$("form.signup").each(function(i, form) {
-	new SignUpForm({el: form});
-});
+new SignUpForm({el: $("#signup-panel form.signup")});
+new LogInForm({el: $("#login form.login")});
 
-$("form.login").each(function(i, form) {
-	new LogInForm({el: form});
-});
+settingsForm = new SettingsForm({ model: user });
 
 var AppRouter = Backbone.Router.extend({
     routes: {
@@ -22,7 +22,7 @@ var AppRouter = Backbone.Router.extend({
         "tos": "tos",
         "cookies": "cookies",
         "signup": "signup",
-        "user": "user",
+        "settings": "settings",
         "servers": "viewServers",
         "servers/page/:page": "viewServersByPage",
         "servers/:slug": "viewServer",
@@ -53,9 +53,9 @@ app.on('route:signup', function() {
 	$(".signup-button").tab('show');
 });
 
-app.on('route:user', function() {
+app.on('route:settings', function() {
 	$(".modal").modal('hide');
-	$("<div/>").data("target", "#user-panel").tab('show');
+	$("<div/>").data("target", "#settings-panel").tab('show');
 });
 
 app.on('route:viewServers', function() {

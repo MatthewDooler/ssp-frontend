@@ -18,8 +18,7 @@ var AuthControlView = Backbone.View.extend({
 
   logout: function() {
     // TODO: this only logs out the client. need to do a DELETE request to revoke the token
-    Storage.delete("session")
-    this.model.set({ id: null, authentication_token: null});
+    logout();
   }
 });
 
@@ -33,8 +32,11 @@ var AddServerView = Backbone.View.extend({
   },
 
   render: function() {
-    console.log(this.model.toJSON())
+    console.log("rendering add-server view");
     this.$el.html(this.template(this.model.toJSON()));
+    // TODO: might be creating zombie views here
+    new SignUpForm({el: this.$el.find("form.signup")});
+    new LogInForm({el: this.$el.find("form.login")});
     return this;
   }
 });
@@ -144,12 +146,21 @@ function flashSiteError(e) {
   }, 5000);
 }
 
+function flashSiteSuccess(e) {
+  $("#site-success").show().animate({'top': '5px'}, 100).html(e);
+  setTimeout(function() {
+    $("#site-success").fadeOut(function() {
+      $(this).css('top', '-100px')
+    });
+  }, 2000);
+}
+
 // A generic form view we can use around the website
 var FormView = Backbone.View.extend({
   events: {
     "submit": "submit",
     "change": "change",
-    "keyup": "change"
+    "keypress": "change"
   },
 
   change: function(e) {
@@ -161,6 +172,10 @@ var FormView = Backbone.View.extend({
     var model = this.model;
     var form = this.$el;
 
+    var submitButton = form.find('button[type="submit"]');
+    var submitButtonValue = submitButton.html();
+    submitButton.html("Loading...").prop('disabled', true);
+
     // Update the model with the values from the form
     form.find('input').each(function(i, input) {
       model.set(input.getAttribute("name"), input.value);
@@ -169,16 +184,18 @@ var FormView = Backbone.View.extend({
     var view = this;
     this.model.save(null, {
       success: function(model, result, xhr) {
-        resetForm(form);
-        view.success(model, result)
+        view.success(form, model, result)
+        submitButton.html(submitButtonValue).prop('disabled', false);
       },
       error: function(model, result, xhr) {
+        console.log("FormView error")
         resetInputErrors(form);
         errors = result.responseJSON;
         for (var field in errors) {
           input = form.find('input[name=\''+field+'\']');
           setInputErrors(input, errors[field]);
         }
+        submitButton.html(submitButtonValue).prop('disabled', false);
       }
     });
   }
@@ -188,14 +205,17 @@ var SignUpForm = FormView.extend({
   initialize: function() {
     this.model = new User();
   },
-  success: function(user, result) {
+  success: function(form, user, result) {
+    console.log("SignUpForm success");
+    resetForm(form);
     // TODO: pass the user model into the user view (this would just be an optimisation, since the user view would usually load that itself)
-    login(user);
+    login(user.get("id"), user.get("authentication_token"));
     this.model = new User();
     // TODO: remove these log lines
     console.log("success");
     console.log(result);
-    app.navigate("user", {trigger: true});
+    flashSiteSuccess("Account created successfully");
+    app.navigate("add", {trigger: true});
   }
 });
 
@@ -203,10 +223,31 @@ var LogInForm = FormView.extend({
   initialize: function() {
     this.model = new Session();
   },
-  success: function(session, result) {
-    login(session);
+  success: function(form, session, result) {
+    console.log("LogInForm success");
+    resetForm(form);
+    login(session.get("id"), session.get("authentication_token"));
     this.model = new Session();
-    app.navigate("user", {trigger: true});
+    $(".modal").modal('hide');
+    flashSiteSuccess("Logged in successfully");
+  }
+});
+
+var SettingsForm = FormView.extend({
+  el: ".settings",
+  template: _.template( $('#tpl-settings').html()),
+  initialize: function() {
+    this.render();
+    this.listenTo(this.model, "change", this.render);
+  },
+  success: function(form, session, result) {
+    console.log("SettingsForm success");
+    flashSiteSuccess("Changes saved");
+  },
+  render: function() {
+    console.log("rendering settings form")
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
   }
 });
 

@@ -10,6 +10,26 @@ var Storage = {
     }
 };
 
+
+var loading = false;
+$.ajaxSetup({
+  beforeSend: function() {
+    loading = true
+    ignorePeriod = 100 // don't display anything if load completes within this time
+    setTimeout(function() {
+      if(loading) {
+        $("#loading-indicator").show().animate({'top': '5px'}, 100).html("Loading...");
+      }
+    }, ignorePeriod);
+  },
+  complete: function() {
+    loading = false
+    $("#loading-indicator").fadeOut(function() {
+      $(this).css('top', '-100px')
+    });
+  }
+});
+
 $(document).ajaxSend(function(event, request) {
    var token = session.get("authentication_token");
    if (token) {
@@ -62,9 +82,20 @@ function back(options) {
   }
 }
 
-function login(model) {
-  Storage.set("session", {"id": model.get("id"), "authentication_token": model.get("authentication_token")});
-  session.set({ id: model.get("id"), authentication_token: model.get("authentication_token")});
+function login(id, authentication_token) {
+  if(id != null) {
+    Storage.set("session", {"id": id, "authentication_token": authentication_token});
+    session.set({id: id, authentication_token: authentication_token});
+    user.set({id: id});
+    user.fetch();
+    // TODO: if the fetch fails, call logout()
+  }
+}
+
+function logout() {
+  Storage.delete("session");
+  session.clear();
+  user.clear();
 }
 
 function getStoredAuthenticationToken() {
