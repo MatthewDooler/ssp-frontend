@@ -37,6 +37,7 @@ var AddServerView = Backbone.View.extend({
     // TODO: might be creating zombie views here
     new SignUpForm({el: this.$el.find("form.signup")});
     new LogInForm({el: this.$el.find("form.login")});
+    new AddServerForm({el: this.$el.find("form.add-server")});
     return this;
   }
 });
@@ -55,7 +56,7 @@ var ServerTableRow = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(this.template(this.model.toTemplateJSON()));
     if(this.model.get("sponsored") == 1) this.$el.addClass("sponsored");
     return this;
   },
@@ -131,7 +132,7 @@ var ServerView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(this.template(this.model.toTemplateJSON()));
     setupScrollableTabContents(); // make sure our new scrolly div has the correct height
     return this;
   }
@@ -248,6 +249,17 @@ var SettingsForm = FormView.extend({
     console.log("rendering settings form")
     this.$el.html(this.template(this.model.toJSON()));
     return this;
+  }
+});
+
+var AddServerForm = FormView.extend({
+  initialize: function() {
+    this.model = new Server();
+  },
+  success: function(form, session, result) {
+    resetForm(form);
+    this.model = new Server();
+    flashSiteSuccess("Added server successfully");
   }
 });
 

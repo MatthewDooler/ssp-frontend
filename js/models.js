@@ -38,6 +38,12 @@ var Server = Backbone.Model.extend({
     } else {
       return undefined;
     }
+  },
+  toJSON: function() {
+    return { server: _.clone( this.attributes ) }
+  },
+  toTemplateJSON: function() {
+    return _.clone(this.attributes)
   }
 });
 
