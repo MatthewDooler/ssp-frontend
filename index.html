@@ -23,6 +23,8 @@
     <![endif]-->
   </head>
   <body>
+
+    <!-- TODO: don't fix the headers if the viewport is too small. e.g., when on mobile (it wastes screen space) -->
     
     <div class="site-header"></div>
 
@@ -555,7 +557,49 @@
       <div class="tab-content-scrollable">
 
         <% if (session.id != null) { %>
-          <div>get ready to ADD YOUR SERVER, WOOP (TODO)</div>
+
+          <form role="form" class="signup">
+            <div class="form-group">
+              <label for="nameInput">Server name</label>
+              <input type="text" class="form-control" id="nameInput" placeholder="Server name" name="name">
+              <span class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="addressInput">IP address</label>
+              <input type="text" class="form-control" id="addressInput" placeholder="IP address or hostname" name="address">
+              <span class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="portInput">Port</label>
+              <select class="form-control" id="portInput" name="port">
+                <option value="43594" selected>43594</option>
+                <option value="43595">43595</option>
+                <option value="5555">5555</option>
+              </select>
+              <span class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="typeInput">Type</label>
+              <input type="text" class="form-control" id="typeInput" placeholder="Type" name="type">
+              <!-- TODO: limit to 10 chars -->
+              <span class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="informationInput">Information (BBCode accepted)</label>
+              <textarea class="form-control" id="informationInput" placeholder="More information and details about your server" name="information" rows="10"></textarea>
+              <span class="help-block"></span>
+            </div>
+
+            <!-- TODO: external client link, website, etc. -->
+
+            <button type="submit" class="btn btn-primary">Add server</button>
+          </form>
+        </div>
+
         <% } else { %>
           <div class="row">
             <div class="col-md-5">
