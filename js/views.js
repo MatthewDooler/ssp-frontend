@@ -178,7 +178,7 @@ var FormView = Backbone.View.extend({
     submitButton.html("Loading...").prop('disabled', true);
 
     // Update the model with the values from the form
-    form.find('input').each(function(i, input) {
+    form.find('input, textarea, select').each(function(i, input) {
       model.set(input.getAttribute("name"), input.value);
     });
 
@@ -193,7 +193,7 @@ var FormView = Backbone.View.extend({
         resetInputErrors(form);
         errors = result.responseJSON;
         for (var field in errors) {
-          input = form.find('input[name=\''+field+'\']');
+          input = form.find('input[name=\''+field+'\'], textarea[name=\''+field+'\'], select[name=\''+field+'\']');
           setInputErrors(input, errors[field]);
         }
         submitButton.html(submitButtonValue).prop('disabled', false);
@@ -264,14 +264,17 @@ var AddServerForm = FormView.extend({
 });
 
 function resetForm(form) {
-  form.find("input").each(function(i, input) {
-    input.value = "";
+  form.find("input, textarea").each(function(i, e) {
+    e.value = "";
+  });
+  form.find("select").each(function(i, e) {
+    $(e).prop('selectedIndex',0);
   });
   resetInputErrors(form);
 }
 
 function resetInputErrors(form) {
-  form.find("input").each(function(i, input) {
+  form.find("input, textarea, select").each(function(i, input) {
     setInputErrors($(input), [])
   });
 }
@@ -281,7 +284,7 @@ function setInputErrors(input, errors) {
   var helpBlock = formGroup.find(".help-block")
   if(errors.length > 0) {
     formGroup.addClass("has-error");
-    helpBlock.text(errors) // TODO: array to csv (and test it!!)
+    helpBlock.text(errors.join(", ")) // TODO: array to csv (and test it!!)
   } else {
     formGroup.removeClass("has-error");
     helpBlock.text("")

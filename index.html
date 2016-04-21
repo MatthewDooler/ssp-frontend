@@ -559,21 +559,23 @@
         <% if (session.id != null) { %>
 
           <form role="form" class="add-server">
+            <input type="hidden" name="client_id" value="0">
+
             <div class="form-group">
               <label for="nameInput">Server name</label>
-              <input type="text" class="form-control" id="nameInput" placeholder="Server name" name="name">
+              <input type="text" class="form-control" id="nameInput" placeholder="Server name" name="status_name" maxlength="30">
               <span class="help-block"></span>
             </div>
 
             <div class="form-group">
               <label for="addressInput">IP address</label>
-              <input type="text" class="form-control" id="addressInput" placeholder="IP address or hostname" name="address">
+              <input type="text" class="form-control" id="addressInput" placeholder="IP address or hostname" name="status_ip" maxlength="45">
               <span class="help-block"></span>
             </div>
 
             <div class="form-group">
               <label for="portInput">Port</label>
-              <select class="form-control" id="portInput" name="port">
+              <select class="form-control" id="portInput" name="status_port">
                 <option value="43594" selected>43594</option>
                 <option value="43595">43595</option>
                 <option value="5555">5555</option>
@@ -583,14 +585,13 @@
 
             <div class="form-group">
               <label for="typeInput">Type</label>
-              <input type="text" class="form-control" id="typeInput" placeholder="Type" name="type">
-              <!-- TODO: limit to 10 chars -->
+              <input type="text" class="form-control" id="typeInput" placeholder="Type" name="status_type" maxlength="10">
               <span class="help-block"></span>
             </div>
 
             <div class="form-group">
-              <label for="informationInput">Information (BBCode accepted)</label>
-              <textarea class="form-control" id="informationInput" placeholder="More information and details about your server" name="information" rows="10"></textarea>
+              <label for="descriptionInput">Information (BBCode accepted)</label>
+              <textarea class="form-control" id="descriptionInput" placeholder="More information and details about your server" name="status_info" rows="10" maxlength="3000"></textarea>
               <span class="help-block"></span>
             </div>
 
